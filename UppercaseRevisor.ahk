@@ -429,7 +429,7 @@ UndoLastToggleSingleCharacterWithinBounds(i) ;i is the character of the single c
 ~*Backspace::ClearBuffers()
 
 ;key strokes that insert special characters
-~Space
+~Space:: 
 ~+Space::AppendToBuffer(" ")
 ~Tab::AppendToBuffer("{Tab}")
 ~Enter::AppendToBuffer("{Enter}")
