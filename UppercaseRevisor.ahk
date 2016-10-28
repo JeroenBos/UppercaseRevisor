@@ -415,7 +415,7 @@ UndoLastToggleSingleCharacterWithinBounds(i) ;i is the character of the single c
 
 
 
-;key strokes that alter the behavior completely:
+;key strokes that alter the behavior completely without fix:
 ~BackSpace::
 ~+Backspace::
 ~*Home::
@@ -427,7 +427,7 @@ UndoLastToggleSingleCharacterWithinBounds(i) ;i is the character of the single c
 ~*Right::
 ~*Backspace::ClearBuffers()
 
-;key strokes that insert special characters
+;key strokes that have special handling
 ~Space:: 
 ~+Space::AppendToBuffer(" ")
 ~Tab::AppendToBuffer("{Tab}")
