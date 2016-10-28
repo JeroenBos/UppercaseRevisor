@@ -35,7 +35,7 @@ OutputBuffers()
     MsgBox %str%
 }
 
-;main function, see "Specs uppercase reviser.docx" for details
+;main function, see the https://github.com/JeroenBos/UppercaseRevisor/wiki for details
 Invoke()
 {
     global bufferSize
