@@ -482,8 +482,6 @@ UndoLastToggleSingleCharacterWithinBounds(i) ;i is the character of the single c
 
 
 ;key strokes that alter the behavior completely without fix:
-~BackSpace::
-~+Backspace::
 ~*Home::
 ~*End::
 ~*PGDN::
@@ -500,6 +498,9 @@ UndoLastToggleSingleCharacterWithinBounds(i) ;i is the character of the single c
 ~Enter::AppendToBuffer("{Enter}")
 ~Left::
 ~+Left::index--
+~BackSpace::
+~+Backspace::PopBuffer()
+
 
 
 ;SHIFT: huh: apparently the tilde here matters: ~Shift::MsgBox displays a messagebox on shift down, but Shift::MsgBox displays it on shift up :/ Anyway, with tilde is the desired behavior so just .... yeah... whatever. it works
