@@ -162,6 +162,72 @@ AppendToBuffer(key)
     return
 }
 
+;removes the last character input from the buffer. Does not remove buffered shift key presses or releases
+PopBuffer()
+{
+    global
+
+    lastExecutedToggleToken := -1
+
+    characterToRemoveIndex := FindLastNonShiftBufferedAction()
+
+    if(characterToRemoveIndex = -1)
+    {
+        return ; only shift key actions are buffered
+    }
+    else
+    {
+        index--
+        BuffersRemoveAt(characterToRemoveIndex)
+    }
+}
+
+FindLastNonShiftBufferedAction()
+{
+    unboundedIndex := index + bufferSize - 1 ;
+    while index <= unboundedIndex
+    {
+        boundedIndex := Mod(unboundedIndex, bufferSize)
+
+        if(keyBuffer[boundedIndex] <> shiftPressed && keyBuffer[boundedIndex] <> shiftReleased)
+        {
+            return boundedIndex
+        }
+
+        unboundedIndex--
+    }
+
+    return -1
+}
+
+;removes the element at the specified index in the buffer (and in the time tick buffer)
+BuffersRemoveAt(indexToRemove)
+{
+    global keyBuffer 
+    global timestampBuffer
+
+    if(indexToRemove < index)
+    {
+        numberOfElementsToMove := index - indexToRemove
+    }
+    else
+    {
+        numberOfElementsToMove := bufferSize - index + indexToRemove - 1
+    }
+
+    unboundedIndex := indexToRemove
+    while unboundedIndex <> unboundedIndex + numberOfElementsToMove
+    {
+        boundedIndex := Mod(unboundedIndex, bufferSize)
+        boundedNextIndex := Mod(unboundedIndex + 1, bufferSize)
+
+        keyBuffer[boundedIndex] := keyBuffer[boundedNextIndex]
+        timestampBuffer[boundedIndex] := timestampBuffer[boundedNextIndex]
+    }
+
+}
+
+
 ClearBuffers()
 {
    keyBuffer := Object()
