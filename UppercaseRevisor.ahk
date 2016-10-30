@@ -216,15 +216,16 @@ BuffersRemoveAt(indexToRemove)
     }
 
     unboundedIndex := indexToRemove
-    while unboundedIndex <> unboundedIndex + numberOfElementsToMove
+    while unboundedIndex <> indexToRemove + numberOfElementsToMove
     {
         boundedIndex := Mod(unboundedIndex, bufferSize)
         boundedNextIndex := Mod(unboundedIndex + 1, bufferSize)
 
         keyBuffer[boundedIndex] := keyBuffer[boundedNextIndex]
         timestampBuffer[boundedIndex] := timestampBuffer[boundedNextIndex]
+        
+        unboundedIndex++
     }
-
 }
 
 
