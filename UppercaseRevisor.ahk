@@ -1,5 +1,5 @@
 #InstallKeybdHook
-SetKeyDelay -1 ;Makes the edit instantaneous
+SetKeyDelay, -1 ;Makes the edit instantaneous. Doesn't seem to work though. Anyway, it's fast enough
 SetBatchLines, -1
 
 ;CONSTANTS:
