@@ -1,5 +1,6 @@
 #InstallKeybdHook
 SetKeyDelay -1 ;Makes the edit instantaneous
+SetBatchLines, -1
 
 ;CONSTANTS:
 global bufferSize := 40 ;The number characters plus shift key events to keep track of
