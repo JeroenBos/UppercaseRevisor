@@ -613,19 +613,3 @@ UndoLastToggleSingleCharacterWithinBounds(i) ;i is the character of the single c
 ~+,:: AppendToBuffer("<")
 ~+.:: AppendToBuffer(">")
 ~+/:: AppendToBuffer("?")
-
-
-
-
-;for shift down, this unfortunately (and aggrevatingly) doesn't work, so we'll fix it in this manner
-;equally aggrevatingly, this has to be placed on top. Found out why: only the parts in this file until the first 'return' or hotkey are initially executed. The hotkeys are set in place regardsless of any code (including a return statement) or other hotkeys above it
-;while true
-;{
-;    Input, key, L1, {LShift}{RShift}
-;    AppendToBuffer(shiftPressed, pressAction)
-;}
-;while true
-;{
-;    KeyWait, Shift, D ;D for down
-;    AppendToBuffer(shiftPressed, pressAction)
-;}
