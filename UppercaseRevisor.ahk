@@ -7,8 +7,8 @@ global bufferSize := 40 ;The number characters plus shift key events to keep tra
 global mymargin := 300 ;The minimum number of milliseconds between two keystrokes so that they can be considered definitely in the right order
 global shiftPressed := "{Shift Down}"
 global shiftReleased := "{Shift Up}"
-global uncapitalizedCharacters := "abcdefghijklmnopqrstuvwxyz`1234567890-=[]\;',./"    ;The characters eligible for substitution for their respective capitalized characters
-global capitalizedCharacters   := "ABCDEFGHIJKLMNOPQRSTUVWXYZ~!@#$%^&*()_+{}|:""<>?"   ;is one character longer due to double quotes being represented as "" rather than "
+global uncapitalizedCharacters := "abcdefghijklmnopqrstuvwxyz1234567890-=[]\;',./"    ;The characters eligible for substitution for their respective capitalized characters
+global capitalizedCharacters   := "ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+{}|:""<>?"   ;is one character longer due to double quotes being represented as "" rather than "
 global newline := "`r"
 
 ;variables:
@@ -592,7 +592,6 @@ UndoLastToggleSingleCharacterWithinBounds(i) ;i is the character of the single c
 ~+Y::
 ~+Z:: AppendToBuffer(Substr(A_ThisHotkey, 3))
 
-~+`:: AppendToBuffer("~")  ; check that tilde indeed works like this
 ~+1:: AppendToBuffer("!")
 ~+2:: AppendToBuffer("@")
 ~+3:: AppendToBuffer("#")
