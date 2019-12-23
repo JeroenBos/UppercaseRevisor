@@ -485,7 +485,7 @@ UndoLastToggleSingleCharacterWithinBounds(i) ;i is the character of the single c
 
 
 ;key strokes that alter the behavior completely without fix:
-~*Home::
+~*Home:: ; '*' means irrespective of modifier keys
 ~*End::
 ~*PGDN::
 ~*PGUP::
