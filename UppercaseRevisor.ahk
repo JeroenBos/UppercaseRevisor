@@ -113,10 +113,6 @@ Invoke()
                                                     && Mod(releaseIndex + 1, bufferIndex) <> index) ;and the shift release wasn't the last action
     {
         numberOfCharactersToCapitalize := releaseIndex - pressIndex - 1
-        if(numberOfCharactersToCapitalize < 0)
-        {
-            MsgBox numberOfCharactersToCapitalize was in fact < 0 (=releaseIndex-pressIndex-1=%numberOfCharactersToCapitalize%), releaseIndex=%releaseIndex%, pressIndex=%pressIndex%
-        }
         i := pressIndex + 1 
         
         while(numberOfCharactersToCapitalize >= 0)
