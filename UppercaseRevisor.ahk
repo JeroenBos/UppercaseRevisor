@@ -401,7 +401,7 @@ GetOtherForm(character, keys, values)
 }
 At(string, index) ;index is one-based, like in any non-self-respecting programming language
 {
-    return substr(string, index, 1)   
+    return SubStr(string, index, 1)
 }
 
 IndexOf(string, char)
