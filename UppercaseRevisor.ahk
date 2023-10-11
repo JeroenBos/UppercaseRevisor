@@ -8,7 +8,7 @@ global mymargin := 300 ;The minimum number of milliseconds between two keystroke
 global shiftPressed := "{Shift Down}"
 global shiftReleased := "{Shift Up}"
 global uncapitalizedCharacters := "abcdefghijklmnopqrstuvwxyz1234567890-=[]\;',./"    ;The characters eligible for substitution for their respective capitalized characters
-global capitalizedCharacters   := "ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+{}|:""<>?"   ;is one character longer due to double quotes being represented as "" rather than "
+global capitalizedCharacters := "ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+{}|:""<>?" ;is one character longer due to double quotes being represented as "" rather than "
 global newline := "`r"
 
 ;variables:
@@ -41,10 +41,10 @@ Invoke()
 {
     global bufferSize
     global successiveInvocationCount
-    
+
     pressIndex := -1
     releaseIndex := -1
-    
+
     if(not FindShiftPressAndRelease(pressIndex, releaseIndex))
     {
         return
@@ -66,7 +66,7 @@ Invoke()
             x := true
         }
         else if(IsWithinMarginOf(releaseIndex))
-        {            
+        { 
             x := true
         }
         else if(IsWithinMarginOf(Mod(pressIndex - 1 + bufferSize, bufferSize)))
@@ -110,11 +110,11 @@ Invoke()
         Decapitalize(Mod(releaseIndex - 1 - successiveInvocationCount + bufferSize, bufferSize))
     }
     else if(pressIndex = Mod(releaseIndex - 1 - successiveInvocationCount + bufferSize, bufferSize) ;whether all successive capitalized letters have been decapitalized
-                                                    && Mod(releaseIndex + 1, bufferIndex) <> index) ;and the shift release wasn't the last action
+        && Mod(releaseIndex + 1, bufferIndex) <> index) ;and the shift release wasn't the last action
     {
         numberOfCharactersToCapitalize := releaseIndex - pressIndex - 1
         i := pressIndex + 1 
-        
+
         while(numberOfCharactersToCapitalize >= 0)
         {
             Capitalize(i)
@@ -127,7 +127,7 @@ Invoke()
     {
         if(Mod(pressIndex + 2 + successiveInvocationCount, bufferIndex) <> index) ;whether there is another succesiveInvocationCount'th character after the shift release
         {
-            Capitalize(Mod(pressIndex + 2 + successiveInvocationCount, bufferSize))    
+            Capitalize(Mod(pressIndex + 2 + successiveInvocationCount, bufferSize)) 
         }
     }
 
@@ -148,7 +148,6 @@ NoCharacterExecute(x, pressIndex, releaseIndex)
         lastExecutedToggleToken := 5
     }
 }
-
 
 AppendToBuffer(key)
 {
@@ -225,21 +224,19 @@ BuffersRemoveAt(indexToRemove)
 
         keyBuffer[boundedIndex] := keyBuffer[boundedNextIndex]
         timestampBuffer[boundedIndex] := timestampBuffer[boundedNextIndex]
-        
+
         unboundedIndex++
     }
 }
 
-
 ClearBuffers()
 {
-   keyBuffer := Object()
-   timestampBuffer := Object()
-   index := 0
-   successiveInvocationCount := 0
-   lastExecutedToggleToken := -1
+    keyBuffer := Object()
+    timestampBuffer := Object()
+    index := 0
+    successiveInvocationCount := 0
+    lastExecutedToggleToken := -1
 }
-
 
 RemoveCharacters(start, length)
 {
@@ -249,14 +246,14 @@ RemoveCharacters(start, length)
     {
         bufferedKey := keyBuffer[i]
         if(not bufferedKey = shiftPressed && not bufferedKey = shiftReleased)
-        {         
-            Send {Backspace}   
+        { 
+            Send {Backspace} 
         }
-        
+
         i := Mod(i - 1 + bufferSize, bufferSize)
         length--
     }
-   return
+    return
 }
 
 InsertCharacter(character)
@@ -265,14 +262,14 @@ InsertCharacter(character)
 }
 InsertBufferedCharacter(i)
 {
-    InsertCharacter(keyBuffer[i])   
+    InsertCharacter(keyBuffer[i]) 
 }
 InsertCharacters(i, count)
 {
     if(count = 0)
     {
         return
-    }   
+    } 
     else
     {
         InsertBufferedCharacter(i)
@@ -280,7 +277,7 @@ InsertCharacters(i, count)
     }
 }
 
-Capitalize(i)    ;i is an index in the buffers
+Capitalize(i) ;i is an index in the buffers
 {
     global keyBuffer
     characterToCapitalize := keyBuffer[i]
@@ -340,7 +337,7 @@ FindShiftPressAndRelease(ByRef pressIndex, ByRef releaseIndex)
             else
             {
                 ;we found the latest shift press
-                pressFound := true   
+                pressFound := true 
                 pressIndex := boundedIndex
             }
         }
@@ -348,7 +345,7 @@ FindShiftPressAndRelease(ByRef pressIndex, ByRef releaseIndex)
         {
             if(releaseFound)
             {
-                return false  ;two consecutive shift releases found
+                return false ;two consecutive shift releases found
             }
             else if(pressFound)
             {
@@ -362,14 +359,14 @@ FindShiftPressAndRelease(ByRef pressIndex, ByRef releaseIndex)
                 releaseFound := true
                 releaseIndex := boundedIndex
             } 
-        }    
+        } 
         else
         {
             ;the key represents some other character
-        }        
+        } 
         unboundedIndex--
     }
-   ;exhausted all buffered keys, to no avail
+    ;exhausted all buffered keys, to no avail
     return false
 }
 
@@ -385,15 +382,15 @@ GetDecapitalizedForm(character)
 }
 GetOtherForm(character, keys, values)
 {
-   i := IndexOf(keys, character)
-   if(i <> -1)
-   {
-       return SubStr(values, i, 1)
-   }
-   
-   ;the character wasn't there... hmmm... ;actually, intended for spacebar, tab, enter
-   ;return the original character, so that in the end no effect is produced, since it is replaced by itself 
-   return character
+    i := IndexOf(keys, character)
+    if(i <> -1)
+    {
+        return SubStr(values, i, 1)
+    }
+
+    ;the character wasn't there... hmmm... ;actually, intended for spacebar, tab, enter
+    ;return the original character, so that in the end no effect is produced, since it is replaced by itself 
+    return character
 }
 At(string, index) ;index is one-based, like in any non-self-respecting programming language
 {
@@ -402,17 +399,17 @@ At(string, index) ;index is one-based, like in any non-self-respecting programmi
 
 IndexOf(string, char)
 {
-   i := 1
-   length := StrLen(string)
-   while i <= length
-   {
-       if(At(string, i) = char)
-       {
-           return i
-       }
-       i++
-   }
-   return -1    
+    i := 1
+    length := StrLen(string)
+    while i <= length
+    {
+        if(At(string, i) = char)
+        {
+            return i
+        }
+        i++
+    }
+    return -1 
 }
 
 ;gets whether the key stroke at the specified index is within the allowed temporal margin from the next key stroke, if any
@@ -426,10 +423,6 @@ IsWithinMarginOf(i) ;i is the index of the first of the two
     return mymargin >= t2 - t1 
 }
 
-
-
-
-
 ToggleSingleCharacterWithinBounds(i)
 {
     global
@@ -439,7 +432,7 @@ ToggleSingleCharacterWithinBounds(i)
         {
             Capitalize(Mod(i + 2, bufferSize))
             lastExecutedToggleToken := 1
-            return   
+            return 
         }
     }
     if(lastExecutedToggleToken <= 1)
@@ -448,7 +441,7 @@ ToggleSingleCharacterWithinBounds(i)
         {
             Capitalize(Mod(i - 2 + bufferSize, bufferSize))
             lastExecutedToggleToken := 2
-            return   
+            return 
         }
     }
     if(lastExecutedToggleToken <> 0)
@@ -479,11 +472,6 @@ UndoLastToggleSingleCharacterWithinBounds(i) ;i is the character of the single c
     }
 }
 
-
-
-
-
-
 ;key strokes that alter the behavior completely without fix:
 ~*Home:: ; '*' means irrespective of modifier keys
 ~*End::
@@ -492,32 +480,30 @@ UndoLastToggleSingleCharacterWithinBounds(i) ;i is the character of the single c
 ~*UP::
 ~*Down::
 ~*Right::
-~*Backspace::ClearBuffers()
+    ~*Backspace::ClearBuffers()
 
-;key strokes that have special handling
+    ;key strokes that have special handling
 ~Space:: 
-~+Space::AppendToBuffer(" ")
-~Tab::AppendToBuffer("{Tab}")
-~Enter::AppendToBuffer("{Enter}")
+    ~+Space::AppendToBuffer(" ")
+    ~Tab::AppendToBuffer("{Tab}")
+    ~Enter::AppendToBuffer("{Enter}")
 ~Left::
-~+Left::index--
+    ~+Left::index--
 ~BackSpace::
-~+Backspace::PopBuffer()
+    ~+Backspace::PopBuffer()
 
-
-
-;SHIFT: huh: apparently the tilde here matters: ~Shift::MsgBox displays a messagebox on shift down, but Shift::MsgBox displays it on shift up :/ Anyway, with tilde is the desired behavior so just .... yeah... whatever. it works
+    ;SHIFT: huh: apparently the tilde here matters: ~Shift::MsgBox displays a messagebox on shift down, but Shift::MsgBox displays it on shift up :/ Anyway, with tilde is the desired behavior so just .... yeah... whatever. it works
 ~Shift::
-{
-    if(keyBuffer[index] <> shiftPressed) ;prevents adding successive shift pressed (in case the shift key is being held down). This requirement is optional, but the buffer could quickly overflow with just shift presses
     {
-       AppendToBuffer(shiftPressed)
+        if(keyBuffer[index] <> shiftPressed) ;prevents adding successive shift pressed (in case the shift key is being held down). This requirement is optional, but the buffer could quickly overflow with just shift presses
+        {
+            AppendToBuffer(shiftPressed)
+        }
+        return
     }
-    return
-}
-~Shift Up::AppendToBuffer(shiftReleased)
+    ~Shift Up::AppendToBuffer(shiftReleased)
 
-;buffer all typed characters
+    ;buffer all typed characters
 ~a::
 ~b::
 ~c::
@@ -560,11 +546,11 @@ UndoLastToggleSingleCharacterWithinBounds(i) ;i is the character of the single c
 ~[::
 ~]::
 ~\::
-~;::
+    ~;::
 ~'::
 ~,::
 ~.::
-~/::AppendToBuffer(Substr(A_ThisHotkey, 2))
+    ~/::AppendToBuffer(Substr(A_ThisHotkey, 2))
 
 ~+A::
 ~+B::
@@ -591,25 +577,25 @@ UndoLastToggleSingleCharacterWithinBounds(i) ;i is the character of the single c
 ~+W::
 ~+X::
 ~+Y::
-~+Z:: AppendToBuffer(Substr(A_ThisHotkey, 3))
+    ~+Z:: AppendToBuffer(Substr(A_ThisHotkey, 3))
 
-~+1:: AppendToBuffer("!")
-~+2:: AppendToBuffer("@")
-~+3:: AppendToBuffer("#")
-~+4:: AppendToBuffer("$")
-~+5:: AppendToBuffer("%")
-~+6:: AppendToBuffer("^")
-~+7:: AppendToBuffer("&")
-~+8:: AppendToBuffer("*")
-~+9:: AppendToBuffer("(")
-~+0:: AppendToBuffer(")")
-~+-:: AppendToBuffer("_")
-~+=:: AppendToBuffer("+")
-~+[:: AppendToBuffer("{")
-~+]:: AppendToBuffer("}")
-~+\:: AppendToBuffer("|")
-~+;:: AppendToBuffer(":")
-~+':: AppendToBuffer("""")
-~+,:: AppendToBuffer("<")
-~+.:: AppendToBuffer(">")
-~+/:: AppendToBuffer("?")
+    ~+1:: AppendToBuffer("!")
+    ~+2:: AppendToBuffer("@")
+    ~+3:: AppendToBuffer("#")
+    ~+4:: AppendToBuffer("$")
+    ~+5:: AppendToBuffer("%")
+    ~+6:: AppendToBuffer("^")
+    ~+7:: AppendToBuffer("&")
+    ~+8:: AppendToBuffer("*")
+    ~+9:: AppendToBuffer("(")
+    ~+0:: AppendToBuffer(")")
+    ~+-:: AppendToBuffer("_")
+    ~+=:: AppendToBuffer("+")
+    ~+[:: AppendToBuffer("{")
+    ~+]:: AppendToBuffer("}")
+    ~+\:: AppendToBuffer("|")
+    ~+;:: AppendToBuffer(":")
+    ~+':: AppendToBuffer("""")
+    ~+,:: AppendToBuffer("<")
+    ~+.:: AppendToBuffer(">")
+    ~+/:: AppendToBuffer("?")
