@@ -1,3 +1,6 @@
+# Archived. Merged into JeroenBos/AHK
+
+
 ### UppercaseRevisor
 
 When typing in camelCase, I often mistime the pressing and releasing of the shift key, leading to words like *cameLCase* or *camelCAse* or just *camelcase*. To correct that, I write this tool, which in its essence replaces the character that is most likely in the wrong case.
